@@ -41,6 +41,7 @@
     <section class="slide">
       <h2>About me!</h2>
       <ul>
+        <li>www.scout.com</li>
         <li>Hank Yates</li>
         <li>twitter.com/hankyates</li>
         <li>github.com/hankyates</li>
@@ -50,14 +51,146 @@
     <section class="slide">
       <h2>Practical ES6 Use</h2>
       <ul>
-        <li>Strings</li>
+        <li>String Literals</li>
+        <li>let</li>
+        <li>Arrow Functions</li>
+        <li>Destructuring Assignment</li>
+        <li>Default Parameters</li>
+        <li>Map, WeakMap, Set, WeakSet</li>
+        <li>Promises</li>
+        <li>Generators</li>
       </ul>
     </section>
 
     <section class="slide">
-      <h2></h2>
+      <h2>Template Literals</h2>
       <a href=""></a>
       <pre><code>
+        `Multiline
+         Awesomeness`
+
+        var name = 'hank';
+        `My name is ${Hank}`
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Let</h2>
+      <a href=""></a>
+      <pre><code>
+        let namedThing = 1;
+        if (true) {
+          let namedThing = 2;
+          console.log(namedThing);
+          // 2
+        }
+        console.log(namedThing);
+        // 1
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Arrow Functions</h2>
+      <a href=""></a>
+      <pre><code>
+        () => {}
+        function() {}
+
+        let snazzyItems = items.map(i => new Item(i));
+        let snazzyItems = items.map(function(i){return new Item(i);});
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Destructuring Assignment</h2>
+      <a href=""></a>
+      <pre><code>
+        var options = {
+          start: 0,
+          size: 30
+        };
+
+        function func(options) {
+          var {size, start} = options;
+          console.log(size);
+          // 30
+        }
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Default Parameters</h2>
+      <a href=""></a>
+      <pre><code>
+        function func(sizeArg) {
+          var size = sizeArg || 0;
+        }
+        function func(size = 0) {
+          return size;
+        }
+        console.log(func());
+        // 0
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Map, WeakMap</h2>
+      <a href=""></a>
+      <pre><code>
+        var elMap = new Map();
+        var el = document.getElementById('size');
+        if (el) {
+          elMap.set(el, 3);
+        }
+
+        // meanwhile ... somewhere else.
+        let size = document.getElementById('size');
+        if (elMap.has(size)) {
+          let size = elMap.get(size)
+          console.log(size);
+          // 3
+        }
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Set, WeakSet</h2>
+      <a href=""></a>
+      <pre><code>
+        var items = [1, 1, 2, 3];
+        var itemSet = new Set(items);
+        var uniqueItems = Array.from(itemSet.entries());
+        console.log(uniqueItems);
+        // [1, 2, 3]
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Promises</h2>
+      <a href=""></a>
+      <pre><code>
+        function getItems(options) {
+          return new Promise(resolve, reject) {
+            var {url} = options;
+            $.ajax(url)
+              .done(function(resp) {
+                resolve(resp)
+              })
+              .fail(function(e) {
+                reject(e);
+              });
+          }
+        }
+        Promise.all([
+          getItems({url: 'http://firstapi.com'}),
+          getItems({url: 'http://secondapi.com'})
+        ])
+        .then(responses => {
+          var [firstResponse, secondResponse] = responses;
+          console.log(firstResponse);
+          console.log(secondResponse);
+        })
+        .catch(e => {console.error(e)});
       </code></pre>
     </section>
 
