@@ -41,123 +41,162 @@
     <section class="slide">
       <h2>About me!</h2>
       <ul>
-        <li>Hank Yates</li>
         <li>www.scout.com</li>
+        <li>Hank Yates</li>
         <li>twitter.com/hankyates</li>
         <li>github.com/hankyates</li>
       </ul>
     </section>
 
     <section class="slide">
-      <h2>Overview</h2>
+      <h2>Practical ES6 Use</h2>
       <ul>
-        <li>Strings</li>
-        <li>Boolean</li>
-        <li>Number</li>
-        <li>Arrays</li>
-        <li>Object</li>
+        <li>String Literals</li>
+        <li>let</li>
+        <li>Arrow Functions</li>
+        <li>Destructuring Assignment</li>
+        <li>Default Parameters</li>
+        <li>Map, WeakMap, Set, WeakSet</li>
+        <li>Promises</li>
+        <li>Generators</li>
       </ul>
     </section>
 
     <section class="slide">
-      <h2>Strings</h2>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">MDN</a>
+      <h2>Template Literals</h2>
+      <a href=""></a>
       <pre><code>
-        var name = 'Hank';
+        `Multiline
+         Awesomeness`
 
-        name.toLowerCase();
-        // hank
+        var name = 'hank';
+        `My name is ${Hank}`
+      </code></pre>
+    </section>
 
-        name.toUpperCase();
-        // HANK
-
-        name.subStr(0, 1);
-        // H
-
-        name.indexOf('an');
+    <section class="slide">
+      <h2>Let</h2>
+      <a href=""></a>
+      <pre><code>
+        let namedThing = 1;
+        if (true) {
+          let namedThing = 2;
+          console.log(namedThing);
+          // 2
+        }
+        console.log(namedThing);
         // 1
       </code></pre>
     </section>
 
     <section class="slide">
-      <h2>Numbers</h2>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">MDN</a>
+      <h2>Arrow Functions</h2>
+      <a href=""></a>
       <pre><code>
-        var five = 5;
+        () => {}
+        function() {}
 
-        five * 5;
-        // 25
-      </code></pre>
-      <pre><code>
-        var bigNumber = 12345.6789;
-
-        bigNumber.toFixed();
-        // 12345
-
-        bigNumber.toFixed(2);
-        // 12345.68
+        let snazzyItems = items.map(i => new Item(i));
+        let snazzyItems = items.map(function(i){return new Item(i);});
       </code></pre>
     </section>
 
     <section class="slide">
-      <h2>Arrays</h2>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">MDN</a>
+      <h2>Destructuring Assignment</h2>
+      <a href=""></a>
       <pre><code>
-        var names = ['hank', 'danny'];
-        //var names = [];
-        //var names = new Array();
-        //var names = new Array(2);
-
-        names.length;
-        // 2
-
-        names.indexOf('danny');
-        // 2
-
-        name.push('deb');
-        // ['hank', 'danny', 'deb'];
-
-        names.pop();
-        // 'deb';
-        // ['hank', 'danny']
-      </code></pre>
-    </section>
-    
-    <section class="slide">
-      <h2>Objects</h2>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">MDN</a>
-      <pre><code>
-        var Danny = {
-          firstName: 'danny',
-          lastName: 'yates',
-          age: '24',
-          fullName: function() {
-            return this.firstname + ' ' + this.lastName;
-          }
-          
+        var options = {
+          start: 0,
+          size: 30
         };
-        
-        Danny.fullName();
-        // 'danny yates'
-        Danny.firstName = 'dan';
-        Danny.fullName();
-        // 'dan yates'
-        Danny.firstName;
-        // 'dan'
 
-      </code></pre>
-    </section>
-    
-    <section class="slide">
-      <h2>Booleans</h2>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">MDN</a>
-      <pre><code>
-        var isLoaded = false;
-        if (!isLoaded) {
-          loadStuff();
-          isLoaded = true;
+        function func(options) {
+          var {size, start} = options;
+          console.log(size);
+          // 30
         }
       </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Default Parameters</h2>
+      <a href=""></a>
+      <pre><code>
+        function func(sizeArg) {
+          var size = sizeArg || 0;
+        }
+        function func(size = 0) {
+          return size;
+        }
+        console.log(func());
+        // 0
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Map, WeakMap</h2>
+      <a href=""></a>
+      <pre><code>
+        var elMap = new Map();
+        var el = document.getElementById('size');
+        if (el) {
+          elMap.set(el, 3);
+        }
+
+        // meanwhile ... somewhere else.
+        let size = document.getElementById('size');
+        if (elMap.has(size)) {
+          let size = elMap.get(size)
+          console.log(size);
+          // 3
+        }
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Set, WeakSet</h2>
+      <a href=""></a>
+      <pre><code>
+        var items = [1, 1, 2, 3];
+        var itemSet = new Set(items);
+        var uniqueItems = Array.from(itemSet.entries());
+        console.log(uniqueItems);
+        // [1, 2, 3]
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Promises</h2>
+      <a href=""></a>
+      <pre><code>
+        function getItems(options) {
+          return new Promise(resolve, reject) {
+            var {url} = options;
+            $.ajax(url)
+              .done(function(resp) {
+                resolve(resp)
+              })
+              .fail(function(e) {
+                reject(e);
+              });
+          }
+        }
+        Promise.all([
+          getItems({url: 'http://firstapi.com'}),
+          getItems({url: 'http://secondapi.com'})
+        ])
+        .then(responses => {
+          var [firstResponse, secondResponse] = responses;
+          console.log(firstResponse);
+          console.log(secondResponse);
+        })
+        .catch(e => {console.error(e)});
+      </code></pre>
+    </section>
+
+    <section class="slide">
+      <h2>Further Reading</h2>
+      <a href="https://github.com/ericdouglas/ES6-Learning">ES6 Learning Repo</a>
     </section>
 
     <!-- End slides. -->
